@@ -19,6 +19,7 @@
 # python imports
 import logging
 
+
 # GAE imports
 import webapp2
 from webapp2_extras.routes import RedirectRoute
@@ -26,17 +27,24 @@ from webapp2_extras.routes import RedirectRoute
 # local imports
 
 
-class ReportHandler(webapp2.RequestHandler):
+class PostHandler(webapp2.RequestHandler):
 
 	def post(self):
 
 		logging.info('post handler invoked')
+		for k, v in self.request.POST.items():
+			logging.debug('%s: %s' % (k, v))
 
-	def put(self):
 
-		logging.info('put handler invoked')
+class PutHandler(webapp2.RequestHandler):
+
+	def put(self, report_id):
+
+		logging.info('put handler invoked: %s' % report_id)
 
 
 routes = [
-    RedirectRoute(r'/', handler=ReportHandler, name='report-collector', strict_slash=True),
+    RedirectRoute(r'/', handler=PostHandler, name='post-report-collector', strict_slash=True),
+    RedirectRoute(r'/<report_id:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}>',
+                  handler=PutHandler, name='put-report-collector', strict_slash=True),
 ]
