@@ -1,5 +1,5 @@
 application: poor-man-acra-backend
-module: default
+module: admin
 version: dev
 runtime: python27
 api_version: 1

@@ -1,0 +1,31 @@
+application: poor-man-acra-backend
+module: default
+version: dev
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+instance_class: F1
+automatic_scaling:
+  max_idle_instances: 2
+  min_pending_latency: 15.0s
+
+builtins:
+- appstats: on
+
+handlers:
+- url: /favicon\.ico
+  static_files: static/favicon.ico
+  upload: static/favicon\.ico
+
+- url: /robots\.txt
+  static_files: static/robots.txt
+  upload: static/robots\.txt
+
+- url: /.*
+  script: apps.report.APP
+  #secure: always
+
+libraries:
+- name: webapp2
+  version: "2.5.2"
