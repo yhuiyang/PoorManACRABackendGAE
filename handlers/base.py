@@ -62,7 +62,6 @@ class Dashboard(BaseHandler):
         self.response.write('Hello world!')
 
 
-
 routes = [
     RedirectRoute(r'/', redirect_to='dashboard', name='home', strict_slash=True),
     RedirectRoute(r'/dashboard', handler=Dashboard, name='dashboard', strict_slash=True),

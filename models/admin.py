@@ -31,12 +31,12 @@ from google.appengine.ext import ndb
 # Admin data
 ###########################################################################
 class ApplicationConfiguration(ndb.Model):
-	name = ndb.String(indexed=False, required=True)
-	package = ndb.String(indexed=False, required=True)
+    name = ndb.String(indexed=False, required=True)
+    package = ndb.String(indexed=False, required=True)
 
 
 class ApplicationManager(ndb.Model):
-	app_cfg = ndb.LocalStructuredProperty(ApplicationConfiguration, repeated=True)
+    app_cfg = ndb.LocalStructuredProperty(ApplicationConfiguration, repeated=True)
 
     @classmethod
     def getInstance(cls):

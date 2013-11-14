@@ -18,6 +18,7 @@
 
 # python imports
 import logging
+import json
 
 
 # GAE imports
@@ -29,18 +30,22 @@ from webapp2_extras.routes import RedirectRoute
 
 class PostHandler(webapp2.RequestHandler):
 
-	def post(self):
+    def post(self):
 
-		logging.info('post handler invoked')
-		for k, v in self.request.POST.items():
-			logging.debug('%s: %s' % (k, v))
+        logging.info('post handler invoked')
+        for k, v in self.request.POST.items():
+            logging.debug('%s: %s' % (k, v))
 
 
 class PutHandler(webapp2.RequestHandler):
 
-	def put(self, report_id):
+    def put(self, report_id):
 
-		logging.info('put handler invoked: %s' % report_id)
+        logging.info('put handler invoked: %s' % report_id)
+        report_detail = json.loads(self.request.body)
+
+        for k, v in report_detail.items():
+            logging.info('%s : %s' % (k, v))
 
 
 routes = [
